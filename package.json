@@ -19,6 +19,6 @@
     "simple-git": "^2.46.0"
   },
   "bin": {
-    "eikon-create-website": "./index.js"
+    "starterkit-create": "./index.js"
   }
 }
