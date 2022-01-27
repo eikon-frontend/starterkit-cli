@@ -23,7 +23,7 @@ const run = async () => {
   status.start();
 
   await git.clone(
-    "https://bitbucket.org/nbuntsch/eikon-parcel-starter.git",
+    "https://github.com/eikon-frontend/starterkit.git",
     data.name
   );
 
