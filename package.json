@@ -1,5 +1,5 @@
 {
-  "name": "eikon-cli",
+  "name": "@eikon/starterkit-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
