@@ -2,9 +2,37 @@
 
 ## Installer Homebrew
 
-- Télécharger node depuis le site officiel [nodejs.org/en/download](https://nodejs.org/en/download) (choisir la version LTS)
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
-- Installer le paquet téléchargé
+## Installer NVM
+
+```bash
+brew install nvm
+```
+
+```bash
+mkdir ~/.nvm
+```
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+```
+
+## Installer Node 16
+
+```bash
+nvm install 16
+```
+
+## Utiliser Node 16
+
+```bash
+nvm use 16
+```
 
 ## Installer le paquet de manière globale
 
@@ -13,6 +41,12 @@ npm install -g @eikon/starterkit-cli
 ```
 
 # Utilisation
+
+## Utiliser Node 16
+
+```bash
+nvm use 16
+```
 
 ## Créer un nouveau site
 
