@@ -1,52 +1,31 @@
 # Prérequis
 
-## Installer Homebrew
+## Installer Xcode Command Line Tools
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+xcode-select --install
 ```
 
-## Installer NVM
+## Installer Node.js
 
-```bash
-brew install nvm
-```
+1.  Sur [nodejs.org](https://nodejs.org), télécharger la version **LTS**
 
-```bash
-mkdir ~/.nvm
-```
+2.  Installer le logiciel
 
-```bash
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
-```
+3.  Régler les problèmes de droits:
 
-## Installer Node 16
+        mkdir ~/.npm-global
+        npm config set prefix '~/.npm-global'
+        echo 'export PATH=~/.npm-global/bin:$PATH' > .zshrc
+        source ~/.zshrc
 
-```bash
-nvm install 16
-```
-
-## Utiliser Node 16
-
-```bash
-nvm use 16
-```
-
-## Installer le paquet de manière globale
+# Installation
 
 ```bash
 npm install -g @eikon/starterkit-cli
 ```
 
 # Utilisation
-
-## Utiliser Node 16
-
-```bash
-nvm use 16
-```
 
 ## Créer un nouveau site
 
