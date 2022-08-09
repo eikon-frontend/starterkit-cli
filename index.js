@@ -4,7 +4,6 @@ const chalk = require("chalk");
 const cli = require("clui");
 const clear = require("clear");
 const figlet = require("figlet");
-const git = require("simple-git")();
 
 const inquirer = require("./inquirer.js");
 const recipes = require("./recipes.js");
@@ -23,21 +22,12 @@ const run = async () => {
   status.start();
 
   try {
-    await git.clone(
-      "https://github.com/eikon-frontend/starterkit.git",
-      data.name
-    );
+    await recipes.cloneGitRepository();
   } catch (error) {
-    console.log(
-      chalk.red(
-        "⚠️ Impossible de se connecter à github. Véfifiez votre connexion internet."
-      )
-    );
-
+    console.log(chalk.red(error.message));
     status.stop();
     return false;
   }
-
   recipes.removeGitDirectory();
   await recipes.installNpmPackages();
   recipes.createScaffolding(data.stylesheets, data.stylesheets_structure);

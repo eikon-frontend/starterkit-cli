@@ -1,7 +1,20 @@
+const git = require("simple-git")();
 const files = require("./files.js");
 const settings = require("./settings.js");
 
 module.exports = {
+  cloneGitRepository: async () => {
+    try {
+      await git.clone(
+        "https://github.com/eikon-frontend/starterkit.git",
+        __basedir
+      );
+    } catch (error) {
+      throw new Error(
+        "⚠️ Impossible de se connecter à github. Véfifiez votre connexion internet."
+      );
+    }
+  },
   removeGitDirectory: () => {
     files.removeDirectory("/.git");
   },
