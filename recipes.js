@@ -24,6 +24,13 @@ module.exports = {
       { type: "directory", path: `${basePath}/modules` },
       { type: "file", path: `${basePath}/modules/_example.${stylesheets}` },
     ]);
+
+    const importRules =
+      stylesheets === "css"
+        ? '@import "./_base.css";\n@import "./_layout.css";\n@import "./modules/_example.css";'
+        : '@import "base";\n@import "layout";\n@import "modules/example";';
+
+    await files.writeInFile(`${basePath}/main.${stylesheets}`, importRules);
   },
   removeGitDirectory: async () => {
     await files.removeDirectory(`${__basedir}/.git`);

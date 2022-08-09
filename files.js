@@ -40,6 +40,13 @@ module.exports = {
       );
     }
   },
+  writeInFile: async (file, string) => {
+    return fs.appendFile(file, string, (error) => {
+      if (error) {
+        console.log(`Impossible d'écrire dans le fichier "${file}"`);
+      }
+    });
+  },
   createDirectory: (directory) => {
     return fs.mkdirSync(directory, (error) => {
       if (error) {
