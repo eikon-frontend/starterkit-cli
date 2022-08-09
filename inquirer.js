@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         type: "list",
-        name: "stylesheets_structure",
+        name: "structure",
         message: "Structure des feuilles de style:",
         choices: [
           { name: "Un seul fichier", value: "default" },

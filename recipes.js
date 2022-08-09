@@ -27,16 +27,14 @@ module.exports = {
       });
     });
   },
-  createScaffolding: async (stylesheets, stylesheets_structure) => {
+  createScaffolding: async (stylesheets, structure) => {
     const resetRules = files.readFile("/src/css/main.css");
 
     files.removeDirectory("/src/css");
-    files.createScaffolding(
-      settings.scaffolding[stylesheets][stylesheets_structure]
-    );
+    files.createScaffolding(settings.scaffolding[stylesheets][structure]);
 
     files.writeInFile(
-      settings.reset_rules[stylesheets][stylesheets_structure].path,
+      settings.reset_rules[stylesheets][structure].path,
       resetRules
     );
 
@@ -44,7 +42,7 @@ module.exports = {
       files.replaceInFile("/src/index.html", "css/main.css", "scss/main.scss");
     }
 
-    if (stylesheets_structure === "smacss") {
+    if (structure === "smacss") {
       files.writeInFile(
         settings.import_rules[stylesheets].path,
         settings.import_rules[stylesheets].data

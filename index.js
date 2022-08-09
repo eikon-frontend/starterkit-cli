@@ -30,7 +30,7 @@ const run = async () => {
   }
   recipes.removeGitDirectory();
   await recipes.installNpmPackages();
-  recipes.createScaffolding(data.stylesheets, data.stylesheets_structure);
+  recipes.createScaffolding(data.stylesheets, data.structure);
 
   status.stop();
 
