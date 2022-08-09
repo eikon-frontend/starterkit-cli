@@ -1,75 +1,49 @@
+const { dir } = require("console");
 const fs = require("fs");
 const mv = require("mv");
 const replace = require("replace-in-file");
 
 module.exports = {
-  createFile: (file) => {
-    return fs.writeFile(file, "", (error) => {
-      if (error) {
-        console.log(`Impossible de créer le fichier "${file}"`);
-      }
-    });
-  },
-  removeFile: (file) => {
-    return fs.unlink(file, (error) => {
-      if (error) {
-        console.log(`Impossible de supprimer le fichier "${file}"`);
-      }
-    });
-  },
-  renameFile: (oldName, newName) => {
-    fs.rename(oldName, newName, (error) => {
-      if (error) {
-        console.log(`Impossible de renommer le fichier "${oldName}"`);
-      }
-    });
-  },
-  moveFiles: (oldPath, newPath) => {
-    mv(oldPath, newPath, { mkdirp: false, clobber: false }, (error) => {
-      if (error) {
-        console.log(`Impossible de déplacer le dosser "${oldPath}"`);
-      }
-    });
-  },
-  replaceInFile: async (files, from, to) => {
-    try {
-      const results = await replace({ files, from, to });
-    } catch (error) {
-      console.log(
-        `Impossible de remplacer la chaîne dans le fichier "${files}"`
-      );
-    }
-  },
-  writeInFile: async (file, string) => {
-    return fs.appendFile(file, string, (error) => {
-      if (error) {
-        console.log(`Impossible d'écrire dans le fichier "${file}"`);
-      }
-    });
-  },
-  createDirectory: (directory) => {
-    return fs.mkdirSync(directory, (error) => {
-      if (error) {
-        console.log(`Impossible de créer le dossier "${directory}"`);
-      }
-    });
-  },
-  removeDirectory: (directory) => {
-    return fs.rmdir(directory, { recursive: true }, (error) => {
+  removeDirectory(directory) {
+    fs.rmSync(__basedir + directory, { recursive: true }, (error) => {
       if (error) {
         console.log(`Impossible d'effacer le dossier "${directory}"`);
       }
     });
   },
+  createFile(file) {
+    fs.writeFileSync(__basedir + file, "", (error) => {
+      if (error) {
+        console.log(`Impossible de créer le fichier "${file}"`);
+      }
+    });
+  },
+  createDirectory(directory) {
+    fs.mkdirSync(__basedir + directory, (error) => {
+      if (error) {
+        console.log(`Impossible de créer le dossier "${directory}"`);
+      }
+    });
+  },
+  readFile(file) {
+    return fs.readFileSync(__basedir + file, "utf8");
+  },
+  writeInFile(file, data) {
+    fs.appendFileSync(__basedir + file, data, (error) => {
+      if (error) {
+        console.log(`Impossible d'écrire dans le fichier "${file}"`);
+      }
+    });
+  },
+  async replaceInFile(file, from, to) {
+    replace({ files: __basedir + file, from, to });
+  },
   createScaffolding(tree) {
     tree.forEach((item) => {
-      switch (item.type) {
-        case "file":
-          this.createFile(item.path);
-          break;
-        case "directory":
-          this.createDirectory(item.path);
-          break;
+      if (item.type === "directory") {
+        this.createDirectory(item.path);
+      } else {
+        this.createFile(item.path);
       }
     });
   },

@@ -1,39 +1,9 @@
 const files = require("./files.js");
+const settings = require("./settings.js");
 
 module.exports = {
-  setCss: async () => {
-    await files.removeDirectory(`${__basedir}/src/scss`);
-    await files.removeFile(`${__basedir}/src/index_scss.html`);
-  },
-  setScss: async () => {
-    await files.replaceInFile(
-      `${__basedir}/src/index.html`,
-      "css/main.css",
-      "scss/main.scss"
-    );
-  },
-  setDefaultStructure: async (stylesheets) => {
-    await files.removeDirectory(`${__basedir}/src/${stylesheets}/smacss`);
-  },
-  setSmacssStructure: async (stylesheets) => {
-    const basePath = `${__basedir}/src/${stylesheets}`;
-
-    await files.createScaffolding([
-      { type: "file", path: `${basePath}/_base.${stylesheets}` },
-      { type: "file", path: `${basePath}/_layout.${stylesheets}` },
-      { type: "directory", path: `${basePath}/modules` },
-      { type: "file", path: `${basePath}/modules/_example.${stylesheets}` },
-    ]);
-
-    const importRules =
-      stylesheets === "css"
-        ? '@import "./_base.css";\n@import "./_layout.css";\n@import "./modules/_example.css";'
-        : '@import "base";\n@import "layout";\n@import "modules/example";';
-
-    await files.writeInFile(`${basePath}/main.${stylesheets}`, importRules);
-  },
-  removeGitDirectory: async () => {
-    await files.removeDirectory(`${__basedir}/.git`);
+  removeGitDirectory: () => {
+    files.removeDirectory("/.git");
   },
   installNpmPackages: () => {
     return new Promise((resolve) => {
@@ -43,5 +13,29 @@ module.exports = {
         resolve();
       });
     });
+  },
+  createScaffolding: async (stylesheets, stylesheets_structure) => {
+    const resetRules = files.readFile("/src/css/main.css");
+
+    files.removeDirectory("/src/css");
+    files.createScaffolding(
+      settings.scaffolding[stylesheets][stylesheets_structure]
+    );
+
+    files.writeInFile(
+      settings.reset_rules[stylesheets][stylesheets_structure].path,
+      resetRules
+    );
+
+    if (stylesheets === "scss") {
+      files.replaceInFile("/src/index.html", "css/main.css", "scss/main.scss");
+    }
+
+    if (stylesheets_structure === "smacss") {
+      files.writeInFile(
+        settings.import_rules[stylesheets].path,
+        settings.import_rules[stylesheets].data
+      );
+    }
   },
 };

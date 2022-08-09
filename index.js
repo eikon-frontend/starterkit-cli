@@ -38,26 +38,9 @@ const run = async () => {
     return false;
   }
 
-  await recipes.removeGitDirectory();
+  recipes.removeGitDirectory();
   await recipes.installNpmPackages();
-
-  switch (data.stylesheets) {
-    case "css":
-      await recipes.setCss();
-      break;
-    case "scss":
-      await recipes.setScss();
-      break;
-  }
-
-  switch (data.stylesheets_structure) {
-    case "default":
-      await recipes.setDefaultStructure(data.stylesheets);
-      break;
-    case "smacss":
-      await recipes.setSmacssStructure(data.stylesheets);
-      break;
-  }
+  recipes.createScaffolding(data.stylesheets, data.stylesheets_structure);
 
   status.stop();
 
