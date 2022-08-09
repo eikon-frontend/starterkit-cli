@@ -22,10 +22,21 @@ const run = async () => {
   const status = new cli.Spinner("Installation en cours");
   status.start();
 
-  await git.clone(
-    "https://github.com/eikon-frontend/starterkit.git",
-    data.name
-  );
+  try {
+    await git.clone(
+      "https://github.com/eikon-frontend/starterkit.git",
+      data.name
+    );
+  } catch (error) {
+    console.log(
+      chalk.red(
+        "⚠️ Impossible de se connecter à github. Véfifiez votre connexion internet."
+      )
+    );
+
+    status.stop();
+    return false;
+  }
 
   await recipes.removeGitDirectory();
   await recipes.installNpmPackages();
