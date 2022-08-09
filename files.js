@@ -1,5 +1,6 @@
-var fs = require("fs");
-var mv = require("mv");
+const fs = require("fs");
+const mv = require("mv");
+const replace = require("replace-in-file");
 
 module.exports = {
   removeDirectory: (directory) => {
@@ -29,5 +30,14 @@ module.exports = {
         console.log(`Impossible de déplacer le dosser "${oldPath}"`);
       }
     });
+  },
+  replaceInFile: async (files, from, to) => {
+    try {
+      const results = await replace({ files, from, to });
+    } catch (error) {
+      console.log(
+        `Impossible de remplacer la chaîne dans le fichier "${files}"`
+      );
+    }
   },
 };

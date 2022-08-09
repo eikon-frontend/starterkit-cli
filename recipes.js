@@ -6,11 +6,10 @@ module.exports = {
     await files.removeFile(`${__basedir}/src/index_scss.html`);
   },
   setScss: async () => {
-    await files.removeDirectory(`${__basedir}/src/css`);
-    await files.removeFile(`${__basedir}/src/index.html`);
-    await files.renameFile(
-      `${__basedir}/src/index_scss.html`,
-      `${__basedir}/src/index.html`
+    await files.replaceInFile(
+      `${__basedir}/src/index.html`,
+      "css/main.css",
+      "scss/main.scss"
     );
   },
   setDefaultStructure: async (stylesheets) => {
