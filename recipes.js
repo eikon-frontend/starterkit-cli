@@ -16,13 +16,14 @@ module.exports = {
     await files.removeDirectory(`${__basedir}/src/${stylesheets}/smacss`);
   },
   setSmacssStructure: async (stylesheets) => {
-    await files.removeFile(
-      `${__basedir}/src/${stylesheets}/main.${stylesheets}`
-    );
-    await files.moveFiles(
-      `${__basedir}/src/${stylesheets}/smacss`,
-      `${__basedir}/src/${stylesheets}`
-    );
+    const basePath = `${__basedir}/src/${stylesheets}`;
+
+    await files.createScaffolding([
+      { type: "file", path: `${basePath}/_base.${stylesheets}` },
+      { type: "file", path: `${basePath}/_layout.${stylesheets}` },
+      { type: "directory", path: `${basePath}/modules` },
+      { type: "file", path: `${basePath}/modules/_example.${stylesheets}` },
+    ]);
   },
   removeGitDirectory: async () => {
     await files.removeDirectory(`${__basedir}/.git`);

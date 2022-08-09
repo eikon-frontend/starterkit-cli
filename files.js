@@ -3,10 +3,10 @@ const mv = require("mv");
 const replace = require("replace-in-file");
 
 module.exports = {
-  removeDirectory: (directory) => {
-    return fs.rmdir(directory, { recursive: true }, (error) => {
+  createFile: (file) => {
+    return fs.writeFile(file, "", (error) => {
       if (error) {
-        console.log(`Impossible d'effacer le dossier "${directory}"`);
+        console.log(`Impossible de créer le fichier "${file}"`);
       }
     });
   },
@@ -39,5 +39,31 @@ module.exports = {
         `Impossible de remplacer la chaîne dans le fichier "${files}"`
       );
     }
+  },
+  createDirectory: (directory) => {
+    return fs.mkdirSync(directory, (error) => {
+      if (error) {
+        console.log(`Impossible de créer le dossier "${directory}"`);
+      }
+    });
+  },
+  removeDirectory: (directory) => {
+    return fs.rmdir(directory, { recursive: true }, (error) => {
+      if (error) {
+        console.log(`Impossible d'effacer le dossier "${directory}"`);
+      }
+    });
+  },
+  createScaffolding(tree) {
+    tree.forEach((item) => {
+      switch (item.type) {
+        case "file":
+          this.createFile(item.path);
+          break;
+        case "directory":
+          this.createDirectory(item.path);
+          break;
+      }
+    });
   },
 };
