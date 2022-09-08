@@ -28,8 +28,23 @@ const run = async () => {
     status.stop();
     return false;
   }
-  recipes.removeGitDirectory();
-  await recipes.installNpmPackages();
+
+  try {
+    recipes.removeGitDirectory();
+  } catch (error) {
+    console.log(chalk.red(error.message));
+    status.stop();
+    return false;
+  }
+
+  try {
+    await recipes.installNpmPackages();
+  } catch (error) {
+    console.log(chalk.red(error.message));
+    status.stop();
+    return false;
+  }
+
   recipes.createScaffolding(data.stylesheets, data.structure);
 
   status.stop();

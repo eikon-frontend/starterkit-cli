@@ -16,14 +16,24 @@ module.exports = {
     }
   },
   removeGitDirectory: () => {
-    files.removeDirectory("/.git");
+    try {
+      files.removeDirectory("/.git");
+    } catch {
+      throw new Error(
+        "⚠️ Impossible de supprimer le dossier du repository git."
+      );
+    }
   },
   installNpmPackages: () => {
     return new Promise((resolve) => {
       const exec = require("child_process").exec;
 
-      exec(`npm install --prefix ${__basedir}`, () => {
-        resolve();
+      exec(`npm install --prefix ${__basedir}`, (error) => {
+        if (error) {
+          throw new Error("⚠️ Impossible d'installer les dépendances via NPM.");
+        } else {
+          resolve();
+        }
       });
     });
   },
