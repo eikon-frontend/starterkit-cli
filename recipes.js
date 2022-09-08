@@ -7,7 +7,7 @@ module.exports = {
     try {
       await git.clone(
         "https://github.com/eikon-frontend/starterkit.git",
-        __basedir
+        `${__basedir}/tmp`
       );
     } catch (error) {
       throw new Error(
@@ -15,9 +15,16 @@ module.exports = {
       );
     }
   },
+  moveFilesFromTmp: () => {
+    try {
+      files.moveAllFiles(`${__basedir}/tmp`, __basedir);
+    } catch {
+      throw new Error("⚠️ Impossible de déplacer les fichiers.");
+    }
+  },
   removeGitDirectory: () => {
     try {
-      files.removeDirectory("/.git");
+      files.removeDirectory(`/tmp/.git`);
     } catch {
       throw new Error(
         "⚠️ Impossible de supprimer le dossier du repository git."

@@ -12,11 +12,12 @@ module.exports = {
           if (!value.length) {
             return "Merci d'entrer le nom du projet.";
           }
-          if (fs.existsSync(value)) {
-            return `Le dossier ${value} existe déjà`;
-          } else {
-            return true;
-          }
+          // if (fs.existsSync(value)) {
+          //   return `Le dossier ${value} existe déjà`;
+          // } else {
+          //   return true;
+          // }
+          return true;
         },
       },
       {

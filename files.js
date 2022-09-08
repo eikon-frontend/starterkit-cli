@@ -4,6 +4,15 @@ const mv = require("mv");
 const replace = require("replace-in-file");
 
 module.exports = {
+  moveAllFiles(source, destination) {
+    mv(source, destination, { mkdirp: false, clobber: false }, (error) => {
+      if (error) {
+        console.log(
+          `Impossible de déplacer les fichiers de "${source}" vers "${destination}"`
+        );
+      }
+    });
+  },
   removeDirectory(directory) {
     fs.rmSync(__basedir + directory, { recursive: true }, (error) => {
       if (error) {

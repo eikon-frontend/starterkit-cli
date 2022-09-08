@@ -38,6 +38,14 @@ const run = async () => {
   }
 
   try {
+    await recipes.moveFilesFromTmp();
+  } catch (error) {
+    console.log(chalk.red(error.message));
+    status.stop();
+    return false;
+  }
+
+  try {
     await recipes.installNpmPackages();
   } catch (error) {
     console.log(chalk.red(error.message));
