@@ -1,10 +1,12 @@
+Créé un environnement de développement basé sur [Parcel](https://parceljs.org).
+
 # Prérequis
 
-## Installer Xcode Command Line Tools
+## Installer Git
 
-```bash
-xcode-select --install
-```
+1. Sur [sourceforge](https://sourceforge.net/projects/git-osx-installer), télécharger l'installeur
+
+2. Installer le logiciel
 
 ## Installer Node.js
 
@@ -16,7 +18,7 @@ xcode-select --install
 
         mkdir ~/.npm-global
         npm config set prefix '~/.npm-global'
-        echo 'export PATH=~/.npm-global/bin:$PATH' > .zshrc
+        echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.zshrc
         source ~/.zshrc
 
 # Installation
