@@ -27,6 +27,12 @@ Créé un environnement de développement basé sur [Parcel](https://parceljs.or
 npm install -g @eikon/starterkit-cli
 ```
 
+# Mise à jour
+
+```bash
+npm update -g @eikon/starterkit-cli
+```
+
 # Utilisation
 
 ## Créer un nouveau site
