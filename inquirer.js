@@ -12,6 +12,9 @@ module.exports = {
           if (!value.length) {
             return "Merci d'entrer le nom du projet.";
           }
+          if (value.includes(" ")) {
+            return "Le nom du projet ne doit pas contenir d'espaces.";
+          }
           // if (fs.existsSync(value)) {
           //   return `Le dossier ${value} existe déjà`;
           // } else {
