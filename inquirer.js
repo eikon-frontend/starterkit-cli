@@ -5,21 +5,57 @@ module.exports = {
   askQuestions: () => {
     const questions = [
       {
+        type: "list",
+        name: "mode",
+        message: "Installer le starterkit...",
+        choices: [
+          { name: "dans un nouveau dossier", value: "new" },
+          {
+            name: "dans un dossier existant",
+            value: "existing",
+          },
+        ],
+        default: ["default"],
+      },
+      {
+        when: (answers) => answers.mode === "new",
         name: "name",
         type: "input",
-        message: "Nom du projet:",
+        message: "Nom du nouveau dossier:",
         validate: (value) => {
           if (!value.length) {
-            return "Merci d'entrer le nom du projet.";
+            return "Merci d'entrer le nom du dossier.";
           }
           if (value.includes(" ")) {
-            return "Le nom du projet ne doit pas contenir d'espaces.";
+            return "Le nom du dossier ne doit pas contenir d'espaces.";
           }
-          // if (fs.existsSync(value)) {
-          //   return `Le dossier ${value} existe déjà`;
-          // } else {
-          //   return true;
-          // }
+          if (fs.existsSync(value)) {
+            return `Le dossier ${value} existe déjà`;
+          }
+
+          return true;
+        },
+      },
+      {
+        when: (answers) => answers.mode === "existing",
+        name: "name",
+        type: "list",
+        message: "Dossier existant:",
+        choices: fs
+          .readdirSync("./")
+          .filter((dir) => fs.statSync(dir).isDirectory())
+          .map((dir) => ({ name: dir, value: dir })),
+        validate: (value) => {
+          if (!value.length) {
+            return "Merci d'entrer le nom du dossier.";
+          }
+          if (value.includes(" ")) {
+            return "Le nom du dossier ne doit pas contenir d'espaces.";
+          }
+          if (!fs.existsSync(value)) {
+            return `Le dossier ${value} est introuvable.`;
+          }
+
           return true;
         },
       },
