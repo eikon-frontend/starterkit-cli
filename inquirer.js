@@ -14,6 +14,10 @@ module.exports = {
             name: "dans un dossier existant",
             value: "existing",
           },
+          {
+            name: "dans le dossier actuel",
+            value: "current",
+          },
         ],
         default: ["default"],
       },

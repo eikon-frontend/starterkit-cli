@@ -16,7 +16,8 @@ console.log(
 
 const run = async () => {
   const data = await inquirer.askQuestions();
-  global.__basedir = data.name;
+
+  global.__basedir = data.mode === "current" ? "./" : data.name;
 
   const status = new cli.Spinner("Installation en cours");
   status.start();
