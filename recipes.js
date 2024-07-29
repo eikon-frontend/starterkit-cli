@@ -1,8 +1,11 @@
-const git = require("simple-git")();
-const files = require("./files.js");
-const settings = require("./settings.js");
+import { exec } from "child_process";
+import { simpleGit } from "simple-git";
+const git = simpleGit();
 
-module.exports = {
+import files from "./files.js";
+import settings from "./settings.js";
+
+export default {
   cloneGitRepository: async () => {
     try {
       await git.clone(
@@ -10,6 +13,7 @@ module.exports = {
         `${__basedir}/tmp`
       );
     } catch (error) {
+      console.error(error);
       throw new Error(
         "⚠️ Impossible de se connecter à github. Véfifiez votre connexion internet."
       );
@@ -33,8 +37,6 @@ module.exports = {
   },
   installNpmPackages: () => {
     return new Promise((resolve) => {
-      const exec = require("child_process").exec;
-
       exec(`npm install --prefix ${__basedir}`, (error) => {
         if (error) {
           throw new Error("⚠️ Impossible d'installer les dépendances via NPM.");

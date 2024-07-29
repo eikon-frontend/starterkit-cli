@@ -1,9 +1,9 @@
-const { dir } = require("console");
-const fs = require("fs");
-const mv = require("mv");
-const replace = require("replace-in-file");
+import { dir } from "console";
+import fs from "fs";
+import mv from "mv";
+import { replaceInFile } from "replace-in-file";
 
-module.exports = {
+export default {
   moveAllFiles(source, destination) {
     mv(source, destination, { mkdirp: false, clobber: false }, (error) => {
       if (error) {
@@ -45,7 +45,7 @@ module.exports = {
     });
   },
   async replaceInFile(file, from, to) {
-    replace({ files: __basedir + file, from, to });
+    replaceInFile({ files: __basedir + file, from, to });
   },
   createScaffolding(tree) {
     tree.forEach((item) => {

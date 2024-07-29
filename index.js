@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const chalk = require("chalk");
-const cli = require("clui");
-const clear = require("clear");
-const figlet = require("figlet");
+import chalk from "chalk";
+import cli from "clui";
+import clear from "clear";
+import figlet from "figlet";
 
-const inquirer = require("./inquirer.js");
-const recipes = require("./recipes.js");
+import inquirer from "./inquirer.js";
+import recipes from "./recipes.js";
 
 clear();
 

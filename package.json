@@ -10,16 +10,17 @@
   "author": "eikon frontend development team",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^4.1.2",
+    "chalk": "^5.3.0",
     "clear": "^0.1.0",
     "clui": "^0.3.6",
-    "figlet": "^1.5.2",
-    "inquirer": "^8.2.0",
+    "figlet": "^1.7.0",
+    "inquirer": "^10.1.4",
     "mv": "^2.1.1",
-    "replace-in-file": "^6.3.5",
-    "simple-git": "^2.46.0"
+    "replace-in-file": "^8.1.0",
+    "simple-git": "^3.25.0"
   },
   "bin": {
     "starterkit-create": "./index.js"
-  }
+  },
+  "type": "module"
 }
