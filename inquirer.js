@@ -9,14 +9,14 @@ export default {
         name: "mode",
         message: "Installer le starterkit...",
         choices: [
+          {
+            name: `dans le dossier actuel (${process.cwd()})`,
+            value: "current",
+          },
           { name: "dans un nouveau dossier", value: "new" },
           {
             name: "dans un dossier existant",
             value: "existing",
-          },
-          {
-            name: "dans le dossier actuel",
-            value: "current",
           },
         ],
         default: ["default"],
