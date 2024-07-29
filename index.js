@@ -59,9 +59,11 @@ const run = async () => {
   status.stop();
 
   console.log(chalk.green("🥳 Projet installé avec succès!"));
-  console.log(
-    chalk.white(`🚀 Pour lancer le projet: \n  cd ${data.name} \n  npm run dev`)
-  );
+  console.log(chalk.white("🚀 Pour lancer le projet:"));
+  if (data.mode !== "current") {
+    console.log(chalk.white(`cd ${data.name}`));
+  }
+  console.log(chalk.white("npm run dev"));
 };
 
 run();
